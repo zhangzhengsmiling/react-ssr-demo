@@ -3,6 +3,7 @@ import { renderToString } from 'react-dom/server';
 import fs from 'fs';
 
 import React from 'react';
+import { StaticRouter as Router } from 'react-router';
 import App from '../App';
 
 const port = 3000;
@@ -31,8 +32,13 @@ const readFilePromise = promisify(fs.readFile);
 const tempalteReader = readFilePromise(templatePath)
   .then(data => data.toString())
 
-serverRenderApp.get('/', (req, res) => {
-  const content = renderToString(<App />);
+serverRenderApp.use('/', (req, res) => {
+  console.log(req.url)
+  const content = renderToString(
+    <Router location={req.url}>
+      <App />
+    </Router>
+  );
   tempalteReader
     .then(template => {
       const html = template.replace(/#content/, content);
@@ -45,7 +51,7 @@ serverRenderApp.get('/', (req, res) => {
     })
 })
 
-clientRenderApp.get('/', (req, res) => {
+clientRenderApp.use('/', (req, res) => {
   tempalteReader
     .then(template => res.send(template.replace(/#content/, '')))
     .catch(err => res.send({ message: err.message }));
