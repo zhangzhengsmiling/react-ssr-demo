@@ -3,7 +3,7 @@ import Home from './containers/Home';
 import About from './containers/About';
 import './style';
 import { Route } from 'react-router';
-import { Link } from 'react-router-dom';
+import { Link, BrowserRouter as Router} from 'react-router-dom';
 
 const App = () => {
   return (
@@ -19,8 +19,8 @@ const App = () => {
         </div>
       </header>
       <main className="main">
-          <Route path="/home" component={Home} />
-          <Route path="/about" component={About} />
+        <Route path="/home" component={Home} />
+        <Route path="/about" component={About} />
       </main>
     </div>
   )
