@@ -14,7 +14,6 @@ const Home = () => {
       <p>
         <button onClick={() => setCount(count => count + 1)}>+</button>
       </p>
-      <div className="aaaa"></div>
     </div>
   )
 }

@@ -28,9 +28,18 @@ const promisify = (fn) => (...args) => {
 }
 
 const readFilePromise = promisify(fs.readFile);
-
+// 读取模板文件template
 const tempalteReader = readFilePromise(templatePath)
-  .then(data => data.toString())
+  .then(data => data.toString());
+
+
+const logger = (req, res, next) => {
+  console.log(`request info: get request from ${req.hostname}, request url: ${req.url}`);
+  // next();
+}
+
+// serverRenderApp.use('/', logger);
+// clientRenderApp.use('/', logger);
 
 serverRenderApp.use('/', (req, res) => {
   console.log(req.url)
