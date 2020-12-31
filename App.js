@@ -1,9 +1,14 @@
 import React from 'react';
+import Home from './containers/Home';
+import './style';
 
 const App = () => {
   return (
-    <div>
-      hello, this is app component
+    <div className="app">
+      <header className="header">this is header</header>
+      <main className="main">
+        this is main block
+      </main>
     </div>
   )
 }

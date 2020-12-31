@@ -1,4 +1,3 @@
-// const express = require('express');
 import express from 'express';
 import { renderToString } from 'react-dom/server';
 import fs from 'fs';

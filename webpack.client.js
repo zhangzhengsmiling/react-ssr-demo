@@ -1,7 +1,8 @@
+const { merge } = require('webpack-merge');
+const webpackConfigBase = require('./webpack.base');
 const path = require('path')                    //node的path模块
 
-module.exports = {
-    mode:'development',                         //开发模式
+const webpackConfigClient = {
     entry:'./client/index.js',              //入口
     output: {                                   //打包出口
         filename:'index.js',                    //打包后的文件名
@@ -11,16 +12,11 @@ module.exports = {
 		extensions: ['.jsx', '.js', '.less', '.scss', '.sass', 'css', '.json'],
 	},
     module: {
-        rules: [{                               //打包规则
-           test:   /\.js?$/,                    //对所有js文件进行打包
-           loader:'babel-loader',               //使用babel-loader进行打包
-           exclude: /node_modules/,             //不打包node_modules中的js文件
-           options: {
-               presets: ['@babel/preset-react',['@babel/preset-env']]
-           }
-       }, {
+        rules: [{
            test: /\.less?$/,
            use: ['style-loader', 'css-loader', 'less-loader'],
        }]
     }
 }
+
+module.exports = merge({}, webpackConfigBase, webpackConfigClient);
