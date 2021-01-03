@@ -4,24 +4,38 @@ import About from './containers/About';
 import './style';
 import { Route } from 'react-router';
 import { Link, BrowserRouter as Router} from 'react-router-dom';
+import { Layout, Tabs } from 'antd';
+const { Header, Content, Footer } = Layout;
+const { TabPane } = Tabs;
 
 const App = () => {
   return (
     <div className="app">
-      <header className="header">
-        <div className="button-area">
-          <Link to="/home">
-            <button>home</button>
-          </Link>
-          <Link to="/about">
-            <button>about</button>
-          </Link>
+      <Header className="header">
+        <div className="header-container">
+          <h1 className="title">
+            SERVER-SIDE RENDER DEMO
+          </h1>
         </div>
-      </header>
-      <main className="main">
-        <Route path="/home" component={Home} />
-        <Route path="/about" component={About} />
-      </main>
+      </Header>
+      <Content className="main">
+        <Tabs defaultActiveKey="1">
+          <TabPane tab="Tab 1" key="1">
+            Content of Tab Pane 1
+          </TabPane>
+          <TabPane tab="Tab 2" key="2">
+            Content of Tab Pane 2
+          </TabPane>
+          <TabPane tab="Tab 3" key="3">
+            Content of Tab Pane 3
+          </TabPane>
+        </Tabs>
+      </Content>
+      <Footer className="footer">
+        <div className="footer-container">
+          <span className="text">备案号：xxxxxx</span>
+        </div>
+      </Footer>
     </div>
   )
 }
