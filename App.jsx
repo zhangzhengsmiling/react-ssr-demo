@@ -1,6 +1,7 @@
 import React from 'react';
 import Home from './containers/Home';
 import About from './containers/About';
+import Todo from './containers/Todo';
 import './style';
 import { Route } from 'react-router';
 import { Link, BrowserRouter as Router} from 'react-router-dom';
@@ -21,6 +22,7 @@ const App = () => {
       <main className="main">
         <Route path="/home" component={Home} />
         <Route path="/about" component={About} />
+        <Route path="/todo" component={Todo} />
       </main>
     </div>
   )

@@ -10,9 +10,14 @@ const webpackConfigBase = {
 		   loader:'babel-loader',
 		   exclude: /node_modules/,
 		   options: {
-			   presets: ['@babel/preset-react',['@babel/preset-env']]
+				 presets: ['@babel/preset-react',['@babel/preset-env']],
+				 plugins: ['@babel/plugin-proposal-class-properties']
 		   }
-	   }]
+	   }, {
+			test:   /(.ts|.tsx)$/,
+			loader:'ts-loader',
+			exclude: /node_modules/,
+		}]
 	}
 }
 
