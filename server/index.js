@@ -2,6 +2,8 @@ import express from 'express';
 import { renderToString } from 'react-dom/server';
 import fs from 'fs';
 import promisify from '../utils/promisify';
+// import http from 'http';
+import request from 'request';
 
 import React from 'react';
 import { StaticRouter as Router } from 'react-router';
@@ -25,7 +27,32 @@ const tempalteReader = readFilePromise(templatePath)
 
 const errorHandlerMiddleware = (res) => error => res.send({ message: error });
 
+const options = {
+  hostname: '127.0.0.1',
+  port: 3002,
+  path: '/todo-list',
+  method: 'GET'
+}
+
+serverRenderApp.use('/api/v1/', (req, res, next) => {
+  const url = 'http://127.0.0.1:3002' + req.url.replace('/api/v1/', '');
+  console.log(url);
+  request.get(url, (err, incomingMessage) => {
+    if(err) {
+      res.send({
+        message: err.message,
+      });
+    } else {
+      res.send(incomingMessage.body);
+    }
+  })
+})
+
 serverRenderApp.use('/', (req, res) => {
+  // if(/\/api\/v1/.test(req.url)) {
+  //   console.log('here...');
+  //   return;
+  // }
   const content = renderToString(
     <Provider store={store}>
       <Router location={req.url}>
@@ -41,6 +68,8 @@ serverRenderApp.use('/', (req, res) => {
     })
     .catch(errorHandlerMiddleware(res))
 })
+
+
 
 clientRenderApp.use('/', (req, res) => {
   tempalteReader

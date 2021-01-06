@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Row, Col, Checkbox, Button, Empty, message } from 'antd';
 
-import { deleteTodoAction, changeTodoStatusAction } from '../../../common/store/actions';
+import { deleteTodoAction, changeTodoStatusAction, addTodoAction } from '../../../common/store/actions';
 
 class List extends Component {
 
@@ -13,6 +13,21 @@ class List extends Component {
   handleDelete = async (index) => {
     await this.props.deleteTodoAction(index);
     message.success("删除成功", 0.5);
+  }
+
+  componentDidMount() {
+    fetch('/api/v1/todo-list')
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+        res.todos.forEach(item => {
+          console.log(item)
+          this.props.addTodoAction({
+            content: item.todo,
+            done: item.finished,
+          });
+        })
+      })
   }
 
   render() {
@@ -63,6 +78,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   deleteTodoAction: (index) => dispatch(deleteTodoAction(index)),
   changeTodoStatusAction: (index) => dispatch(changeTodoStatusAction(index)),  
+  addTodoAction: (todo) => dispatch(addTodoAction(todo))
 })
 export default connect(
   mapStateToProps,
