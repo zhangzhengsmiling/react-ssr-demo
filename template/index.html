@@ -7,12 +7,10 @@
   </head>
   <body>
     <div id="root">#content</div>
-    <script src="/index.js"></script>
+    <script src="/bundle.js"></script>
     <script>
-      // 白屏结束时间
-      window.firstPaint = Date.now()
-      // 白屏时间
-      console.log(firstPaint - performance.timing.navigationStart)
+      const timing = window.performance.timing;
+      console.log('白屏', timing.responseEnd - timing.fetchStart);
     </script>
   </body>
 </html>

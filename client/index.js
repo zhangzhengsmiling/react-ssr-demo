@@ -4,8 +4,12 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from '../common/store';
 import App from '../App';
+// import routerGen from '../containers/preview/src/router';
+// const createBrowserHistory =require("history").createBrowserHistory;
+// const history = createBrowserHistory();
 
-ReactDom.render(
+// const Routers = routerGen(Router, { history });
+ReactDom.hydrate(
     <Provider store={store}>
       <Router>
         <App />

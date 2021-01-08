@@ -5,12 +5,9 @@ const path = require('path');
 const webpackConfigClient = {
     entry:'./client/index.js',
     output: {
-        filename:'index.js',
+        filename:'bundle.js',
         path:path.resolve(__dirname,'public'),
     },
-    resolve: {
-		extensions: ['.jsx', '.js', '.less', '.scss', '.sass', 'css', '.json'],
-	},
     module: {
         rules: [{
            test: /\.less?$/,
