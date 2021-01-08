@@ -9,12 +9,11 @@ import App from '../App';
 // const history = createBrowserHistory();
 
 // const Routers = routerGen(Router, { history });
-ReactDom.render(
+ReactDom.hydrate(
     <Provider store={store}>
       <Router>
         <App />
       </Router>
-      {/* <Routers /> */}
     </Provider>,
   document.getElementById('root')
 )

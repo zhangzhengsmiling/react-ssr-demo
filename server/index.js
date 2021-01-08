@@ -6,7 +6,6 @@ import promisify from '../utils/promisify';
 import React from 'react';
 import { StaticRouter as Router } from 'react-router';
 import App from '../App';
-// import routerGen from '../containers/preview/src/router';
 import { Provider } from 'react-redux';
 import store from '../common/store';
 
@@ -56,6 +55,7 @@ serverRenderApp.listen(port, () => {
 const clientRenderApp = express();
 clientRenderApp.use('/', express.static('public'));
 clientRenderApp.use('/', (req, res) => {
+  if(req.url === '/favicon.ico') return;
   tempalteReader
     .then(template => template.replace(/#content/, ''))
     .then(logger)
