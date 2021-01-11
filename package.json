@@ -9,7 +9,7 @@
     "dev:start": "nodemon --watch build --exec node \"./build/bundle.js\"",
     "dev": "npm-run-all --parallel dev:**",
     "dev:build:client": "webpack --config webpack.client.js --watch",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
+    "changelog": "rm ./CHANGELOG.md && conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "keywords": [],
   "author": "",
@@ -38,8 +38,11 @@
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/preset-env": "^7.12.11",
     "@babel/preset-react": "^7.12.10",
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
     "babel-loader": "^8.2.2",
     "cz-conventional-changelog": "^3.3.0",
+    "husky": "^4.3.7",
     "ignore-loader": "^0.1.2",
     "ts-loader": "^8.0.13",
     "webpack-merge": "^5.7.3"
@@ -47,6 +50,16 @@
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   }
 }
