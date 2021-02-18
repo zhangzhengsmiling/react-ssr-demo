@@ -7,7 +7,6 @@ import AnimBarChart from './containers/AnimBarChart';
 import CarouselTable from './containers/CarouselTable';
 import './style';
 import { Route } from 'react-router';
-import { Link } from 'react-router-dom';
 
 const App = () => {
   return (

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './style';
+import homeStyle from './style';
 
 const Home = () => {
   const [count, setCount] = useState(0);
@@ -19,3 +19,4 @@ const Home = () => {
 }
 
 export default Home;
+// export default withStyles(homeStyle)(Home);

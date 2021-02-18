@@ -3,7 +3,7 @@ const path = require('path');
 const webpackConfigBase = {
 	mode:'development',
 	resolve: {
-		extensions: ['.jsx', '.js', '.less', '.scss', '.sass', 'css', '.json'],
+		extensions: ['.jsx', '.js', '.less', '.scss', '.sass', '.css', '.json'],
 		alias: {
 			"@": path.resolve(__dirname, 'containers/preview/src'),
 			layout: path.resolve(__dirname, 'containers/preview/src/layout'),

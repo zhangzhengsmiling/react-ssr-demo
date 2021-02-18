@@ -2,6 +2,8 @@ import express from 'express';
 import { renderToString } from 'react-dom/server';
 import fs from 'fs';
 import promisify from '../utils/promisify';
+// import style from '../containers/Todo/app.less';
+import StyleContext from 'isomorphic-style-loader/StyleContext';
 
 import React from 'react';
 import { StaticRouter as Router } from 'react-router';
@@ -23,7 +25,6 @@ const logger = (data) => {
   return data;
 }
 
-
 /**
  * server-sider rendering...
  */
@@ -32,16 +33,31 @@ serverRenderApp.use('/', express.static('public'));
 serverRenderApp.use('/', (req, res) => {
   const location = req.url;
   if(req.url === '/favicon.ico') return;
+  const css = new Set();
+  const insertCss = (...styles) => {
+    return styles.forEach(style => {
+      console.log(style);
+      return css.add(style._getCss())
+    })
+  }
+
   const content = renderToString(
-    <Provider store={store}>
-      <Router location={location}>
-        <App />
-      </Router>
-    </Provider>
+    <StyleContext.Provider value={{ insertCss }}>
+      <Provider store={store}>
+        <Router location={location}>
+          <App />
+        </Router>
+      </Provider>
+    </StyleContext.Provider>
   );
 
   tempalteReader
     .then(template => template.replace(/#content/, content))
+    .then(template => template.replace(/\<style\>\<\/style\>/, '<style>'+ [...css].join('') +'</style>'))
+    .then(res => {
+      console.log(css);
+      return res;
+    })
     .then(html => res.send(html))
     .catch(errorHandlerMiddleware(res))
 })
@@ -58,7 +74,6 @@ clientRenderApp.use('/', (req, res) => {
   if(req.url === '/favicon.ico') return;
   tempalteReader
     .then(template => template.replace(/#content/, ''))
-    .then(logger)
     .then(html => res.send(html))
     .catch(errorHandlerMiddleware(res));
 })
