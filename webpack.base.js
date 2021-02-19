@@ -12,10 +12,17 @@ const webpackConfigBase = {
 		rules: [{
 		   test:   /(.js|.jsx)$/,
 		   loader:'babel-loader',
-		   exclude: /node_modules/,
+			 exclude: /node_modules/,
 		   options: {
 				 presets: ['@babel/preset-react',['@babel/preset-env']],
-				 plugins: ['@babel/plugin-proposal-class-properties']
+				 plugins: [
+					 '@babel/plugin-proposal-class-properties',
+					//  ["import", {
+					// 	"libraryName": "antd",
+					// 	"libraryDirectory": "es",
+					// 	"style": 'css' // `style: true` 会加载 less 文件
+					// }]
+				],
 		   }
 	   }, {
 			test:   /(.ts|.tsx)$/,
