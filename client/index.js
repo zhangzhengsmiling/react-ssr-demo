@@ -3,7 +3,7 @@ import ReactDom from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from '../common/store';
-import App from '../App';
+import App from '../containers/App/App';
 import StyleContext from 'isomorphic-style-loader/StyleContext';
 // import routerGen from '../containers/preview/src/router';
 // const createBrowserHistory =require("history").createBrowserHistory;

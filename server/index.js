@@ -7,7 +7,7 @@ import StyleContext from 'isomorphic-style-loader/StyleContext';
 
 import React from 'react';
 import { StaticRouter as Router } from 'react-router';
-import App from '../App';
+import App from '../containers/App/App';
 import { Provider } from 'react-redux';
 import store from '../common/store';
 

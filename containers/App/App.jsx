@@ -1,14 +1,14 @@
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/withStyles';
-import Home from './containers/Home';
-import About from './containers/About';
-import Todo from './containers/Todo';
-import CountDown from './containers/CountDown/src';
-import AnimBarChart from './containers/AnimBarChart';
-import CarouselTable from './containers/CarouselTable';
+import Home from '../Home';
+import About from '../About';
+import Todo from '../Todo';
+import CountDown from '../CountDown/src';
+import AnimBarChart from '../AnimBarChart/src';
+import CarouselTable from '../CarouselTable/src';
 import appStyle from './style';
 import { Route } from 'react-router';
-import compose from './utils/compose';
+import compose from '../../utils/compose';
 
 const App = () => {
   return (
