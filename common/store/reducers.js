@@ -1,11 +1,8 @@
 import { ADD_TODO, DELETE_TODO, CHANGE_TODO_STATUS } from './action-types';
-// import { ITodo  } from '../types';
-// import { AddTodoAction, DeleteTodoAction, ChangeTodoStatusAction } from './actions'
 
 const initTodoList = [];
 
 export const todoReducer = (todos = initTodoList, action) => {
-  console.log(todos)
   switch(action.type) {
     case ADD_TODO:
       return [action.todo, ...todos];

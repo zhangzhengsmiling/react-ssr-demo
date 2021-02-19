@@ -168,7 +168,6 @@ const circlePie = (props) => {
           axisLabel: {
             formatter: function (params) {
               let item = chartData[params];
-              console.log(item);
               return (
                 "{line|}{circle|●}{name|" +
                 item.name +

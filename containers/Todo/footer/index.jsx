@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import withStyles from 'isomorphic-style-loader/withStyles';
-
-// import { RootState } from '../../store';
-// import { ITodo } from '../../types';
 import footerStyle from './footer';
 import compose from '@/utils/compose';
 

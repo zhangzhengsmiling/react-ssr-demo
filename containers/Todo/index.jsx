@@ -1,13 +1,11 @@
 import React from 'react';
 import { Row, Card } from 'antd';
-
 import Header from './header';
 import List from './list';
 import Footer from './footer';
 import appStyle from './app';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import compose from '@/utils/compose';
-
 
 const App = () => {
   return (

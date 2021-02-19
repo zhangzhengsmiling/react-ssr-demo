@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 const About = (props) => {
-  console.log(props)
   return (
     <div>
       hello, this is about page....
