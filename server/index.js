@@ -36,7 +36,6 @@ serverRenderApp.use('/', (req, res) => {
   const css = new Set();
   const insertCss = (...styles) => {
     return styles.forEach(style => {
-      console.log(style);
       return css.add(style._getCss())
     })
   }
@@ -54,10 +53,6 @@ serverRenderApp.use('/', (req, res) => {
   tempalteReader
     .then(template => template.replace(/#content/, content))
     .then(template => template.replace(/\<style\>\<\/style\>/, '<style>'+ [...css].join('') +'</style>'))
-    .then(res => {
-      console.log(css);
-      return res;
-    })
     .then(html => res.send(html))
     .catch(errorHandlerMiddleware(res))
 })

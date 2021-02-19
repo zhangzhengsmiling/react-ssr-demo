@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import withStyles from 'isomorphic-style-loader/withStyles';
 
 // import { RootState } from '../../store';
 // import { ITodo } from '../../types';
-import './footer';
+import footerStyle from './footer';
+import compose from '@/utils/compose';
 
 
 class Footer extends Component {
@@ -22,7 +24,8 @@ const mapStateToProps = (state) => ({
   todoList: state.todoList
 })
 
-export default connect(
-  mapStateToProps,
-  {}
+
+export default compose(
+  withStyles(footerStyle),
+  connect(mapStateToProps, {})
 )(Footer);

@@ -3,6 +3,7 @@ import { Row, Col, Input, Button, message } from 'antd';
 import { connect } from 'react-redux';
 
 import { addTodoAction } from '../../../common/store/actions';
+import compose from '@/utils/compose';
 
 class Header extends Component {
   state = {
@@ -54,9 +55,7 @@ const mapStaateToProps = (state) => ({
   todoList: state.todoList
 })
 
-export default connect(
-  mapStaateToProps,
-  {
-    addTodoAction
-  }
-)(Header);
+
+export default compose(
+  connect(mapStaateToProps, { addTodoAction })
+)(Header)

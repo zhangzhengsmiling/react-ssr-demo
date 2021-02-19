@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Row, Col, Checkbox, Button, Empty, message } from 'antd';
 
-import { deleteTodoAction, changeTodoStatusAction } from '../../../common/store/actions';
+import compose from '@/utils/compose';
+import { deleteTodoAction, changeTodoStatusAction } from '@/common/store/actions';
 
 class List extends Component {
 
@@ -64,7 +65,7 @@ const mapDispatchToProps = (dispatch) => ({
   deleteTodoAction: (index) => dispatch(deleteTodoAction(index)),
   changeTodoStatusAction: (index) => dispatch(changeTodoStatusAction(index)),  
 })
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps)
 )(List);

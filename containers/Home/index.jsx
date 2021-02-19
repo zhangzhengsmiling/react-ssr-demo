@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import withStyles from 'isomorphic-style-loader/withStyles';
+import compose from '@/utils/compose';
 import homeStyle from './style';
 
 const Home = () => {
@@ -18,5 +20,6 @@ const Home = () => {
   )
 }
 
-export default Home;
-// export default withStyles(homeStyle)(Home);
+export default compose(
+  withStyles(homeStyle)
+)(Home);
