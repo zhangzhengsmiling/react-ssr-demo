@@ -3,10 +3,10 @@ const webpackConfigBase = require('./webpack.base');
 const path = require('path');
 
 const webpackConfigClient = {
-  entry:'./client/index.js',
+  entry: path.resolve(__dirname, '../client/index.js'),
   output: {
     filename:'bundle.js',
-    path:path.resolve(__dirname,'public'),
+    path:path.resolve(__dirname,'../public'),
   },
   module: {
     rules: [
