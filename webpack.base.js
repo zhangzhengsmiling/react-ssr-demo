@@ -23,6 +23,7 @@ const webpackConfigBase = {
 					// 	"style": 'css' // `style: true` 会加载 less 文件
 					// }]
 				],
+				// cacheDirectory: true
 		   }
 	   }, {
 			test:   /(.ts|.tsx)$/,

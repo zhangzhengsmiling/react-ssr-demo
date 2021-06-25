@@ -1,6 +1,7 @@
-import React, { Component, KeyboardEvent, ChangeEvent } from 'react';
+import React, { Component } from 'react';
 import { Row, Col, Input, Button, message } from 'antd';
 import { connect } from 'react-redux';
+// import 'antd/lib/button/style';
 
 import { addTodoAction } from '../../../common/store/actions';
 import compose from '@/utils/compose';
@@ -41,10 +42,21 @@ class Header extends Component {
     return (
       <Row>
         <Col span={16}>
-          <Input placeholder="please input todo：" value={this.state.todoText} onChange={(e) => this.handleChange(e)} onKeyDown={(e) => this.handleKeyDown(e)}></Input>
+          <Input
+            placeholder="please input todo："
+            value={this.state.todoText}
+            onChange={(e) => this.handleChange(e)}
+            onKeyDown={(e) => this.handleKeyDown(e)}
+          />
         </Col>
         <Col span={8}>
-          <Button disabled={this.state.todoText.trim() === ''} loading={this.state.isBtnLoading} type={'primary'} style={{ marginLeft: '50%', transform: 'translateX(-50%)' }} onClick={() => this.handleAdd()}>添加</Button>
+          <Button
+            disabled={this.state.todoText.trim() === ''}
+            loading={this.state.isBtnLoading}
+            type={'primary'}
+            style={{ marginLeft: '50%', transform: 'translateX(-50%)' }}
+            onClick={() => this.handleAdd()}
+          >添加</Button>
         </Col>
       </Row>
     )
@@ -54,7 +66,6 @@ class Header extends Component {
 const mapStaateToProps = (state) => ({
   todoList: state.todoList
 })
-
 
 export default compose(
   connect(mapStaateToProps, { addTodoAction })

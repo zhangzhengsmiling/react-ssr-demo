@@ -18,7 +18,14 @@ const webpackConfigClient = {
             importLoaders: 1,
             esModule: false,
           }
-        }, 'less-loader'],
+        }, {
+          loader: 'less-loader',
+          options: {
+            lessOptions: {
+              javascriptEnabled: true
+            }
+          }
+        }],
       },
       {
         test: /\.css?$/,

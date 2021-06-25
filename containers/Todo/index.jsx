@@ -7,21 +7,24 @@ import appStyle from './app';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import compose from '@/utils/compose';
 
-const App = () => {
-  return (
-    <div className="app-container">
-      <div className="inner-box" style={{ width: '80vw' }}>
-        <Row>
-          <Card style={{ width: '100%' }} title={<Header/>}>
-            <List />
-          </Card>
-        </Row>
-        <Row>
-          <Footer />
-        </Row>
+class App extends React.Component {
+
+  render() {
+    return (
+      <div className="app-container">
+        <div className="inner-box" style={{ width: '80vw' }}>
+          <Row>
+            <Card style={{ width: '100%' }} title={<Header/>}>
+              <List />
+            </Card>
+          </Row>
+          <Row>
+            <Footer />
+          </Row>
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 export default compose(
