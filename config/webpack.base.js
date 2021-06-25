@@ -1,11 +1,12 @@
 const path = require('path');
+const rootDir = path.resolve(__dirname, '../');
 
 const webpackConfigBase = {
 	mode:'development',
 	resolve: {
 		extensions: ['.jsx', '.js', '.less', '.scss', '.sass', '.css', '.json'],
 		alias: {
-			"@": path.resolve(__dirname),
+			"@": rootDir,
 		}
 	},
 	module: {
