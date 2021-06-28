@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col, Input, Button, message } from 'antd';
 import { connect } from 'react-redux';
-// import 'antd/lib/button/style';
-// import 'antd/lib/row/style';
-// import 'antd/lib/col/style';
-// import 'antd/lib/input/style';
-// import 'antd/lib/message/style';
 
 import { addTodoAction } from '../../../common/store/actions';
 import compose from '@/utils/compose';
