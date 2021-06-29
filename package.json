@@ -36,17 +36,18 @@
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "babel-loader": "^8.2.2",
+    "babel-plugin-import": "^1.13.3",
     "cz-conventional-changelog": "^3.3.0",
     "husky": "^4.3.7",
     "ignore-loader": "^0.1.2",
     "isomorphic-style-loader": "^5.1.0",
-    "ts-loader": "^8.0.13",
-    "webpack-merge": "^5.7.3",
-    "webpack-node-externals": "^2.5.2",
     "less": "^4.1.1",
     "less-loader": "^10.0.0",
+    "ts-loader": "^8.0.13",
     "webpack": "^5.11.1",
-    "webpack-cli": "^4.3.0"
+    "webpack-cli": "^4.3.0",
+    "webpack-merge": "^5.7.3",
+    "webpack-node-externals": "^2.5.2"
   },
   "config": {
     "commitizen": {

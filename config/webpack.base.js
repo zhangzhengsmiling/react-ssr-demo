@@ -17,7 +17,12 @@ const webpackConfigBase = {
 		   options: {
 				 presets: ['@babel/preset-react',['@babel/preset-env']],
 				 plugins: [
-					 '@babel/plugin-proposal-class-properties',
+					'@babel/plugin-proposal-class-properties',
+					["import", { 
+						"libraryName": "antd",
+						"libraryDirectory": "lib",  // libraryDirectory 默认为 lib
+						"style": true ,
+					}],
 				],
 				cacheDirectory: true
 		   }
