@@ -6,8 +6,38 @@ import Footer from './footer';
 import appStyle from './app';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import compose from '@/utils/compose';
+import {connect} from 'react-redux';
+import {
+  deleteTodoAction,
+  changeTodoStatusAction,
+  addTodoActionSync
+} from '@/common/store/actions';
+import requestContext from '../../common/context/request-context';
 
 class App extends React.Component {
+
+  static contextType = requestContext;
+
+  componentDidMount() {
+    console.log(this.context, 'context....')
+    fetch('/api/v1/list')
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+        const { success, data, message } = res;
+        if (success) {
+          // this.props.addTodoActionSync()
+          data.forEach(item => {
+            this.props.addTodoActionSync({
+              content: item.content
+            });
+          })
+        } else {
+          console.error(message);
+        }
+
+      })
+  }
 
   render() {
     return (
@@ -26,7 +56,18 @@ class App extends React.Component {
     )
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    todoList: state.todoList
+  }
+}
 
+const mapDispatchToProps = (dispatch) => ({
+  deleteTodoAction: (index) => dispatch(deleteTodoAction(index)),
+  changeTodoStatusAction: (index) => dispatch(changeTodoStatusAction(index)),  
+  addTodoActionSync: (payload) => dispatch(addTodoActionSync(payload)),
+})
 export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
   withStyles(appStyle)
 )(App);

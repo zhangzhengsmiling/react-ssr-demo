@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import store from '../common/store';
 import App from '../containers/App/App';
 import StyleContext from 'isomorphic-style-loader/StyleContext';
+// import RequestContext from '../common/context/request-context';
 
 const insertCss = () => {}
 ReactDom.hydrate(

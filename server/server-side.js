@@ -15,6 +15,20 @@ const port = config[CONFIG_SERVER_KEY].PORT;
  * server-sider rendering...
  */
  const serverRenderApp = express();
+
+ serverRenderApp.get('/api/v1/list', (req, res) => {
+  res.send({
+    code: 1,
+    msg: '',
+    success: true,
+    data: [
+      { content: 'hello, this is content1' },
+      { content: 'hello, this is content2' },
+      { content: 'hello, this is content3' },
+    ]
+  })
+});
+
  serverRenderApp.use('/', express.static('public'));
  serverRenderApp.use('/', (req, res) => {
    const location = req.url;
@@ -27,21 +41,21 @@ const port = config[CONFIG_SERVER_KEY].PORT;
    }
  
    const content = renderToString(
-     <StyleContext.Provider value={{ insertCss }}>
-       <Provider store={store}>
-         <Router location={location}>
-           <App />
-         </Router>
-       </Provider>
-     </StyleContext.Provider>
+      <StyleContext.Provider value={{ insertCss }}>
+        <Provider store={store}>
+          <Router>
+            <App />
+          </Router>
+        </Provider>
+      </StyleContext.Provider>
    );
- 
    templateReader
      .then(template => template.replace(/#content/, content))
      .then(template => template.replace(/\<style\>\<\/style\>/, '<style>'+ [...css].join('') +'</style>'))
      .then(html => res.send(html))
      .catch(errorHandlerMiddleware(res))
- })
+ });
+
  serverRenderApp.listen(port, () => {
    console.log('server side render app started on ' + port);
  });
