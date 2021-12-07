@@ -1,15 +1,14 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 const About = (props) => {
   return (
     <div>
-      hello, this is about page....
-      <p>{props.user.name}</p>
+      hello, this is about...
+      <p>
+        <button onClick={() => props.history.goBack()}>back</button>
+      </p>
     </div>
   )
 }
 
-export default connect(
-  state => state,
-)(About);
+export default About;

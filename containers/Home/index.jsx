@@ -1,25 +1,52 @@
-import React, { useState } from 'react';
-import withStyles from 'isomorphic-style-loader/withStyles';
-import compose from '@/utils/compose';
-import homeStyle from './style';
+import React, { useContext, useEffect } from 'react';
+import TestContext from '@/common/context/TestContext';
 
-const Home = () => {
-  const [count, setCount] = useState(0);
+const Home = (props) => {
+
+  const store = useContext(TestContext);
+
+  useEffect(() => {
+    Home.getInitialData()
+      .then(user => {
+        store.setData(user);
+      })
+  }, [])
+
   return (
-    <div className="home">
-      <span>
-        hello, this is home component
-      </span>
+    <div>
+      <h1>
+        {store.data?.name}'s homepage
+      </h1>
       <p>
-        {count}
+        age: {store.data?.age}
       </p>
       <p>
-        <button onClick={() => setCount(count => count + 1)}>+</button>
+        link...
+      </p>
+      <p>
+        <button onClick={() => props.history.push('/list')}>to list</button>
+      </p>
+      <p>
+        <button onClick={() => props.history.push('/about')}>to about</button>
       </p>
     </div>
   )
 }
 
-export default compose(
-  withStyles(homeStyle)
-)(Home);
+Home.getInitialData = () => {
+  if (Home.data) return new Promise(() => Home.data)
+  const promise = new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({
+        name: 'zhangzhengsmiling',
+        age: 18,
+      })
+    }, 1000);
+  }).then(data => {
+    Home.data = data;
+    return data;
+  })
+  return promise;
+}
+
+export default Home;

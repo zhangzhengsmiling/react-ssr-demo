@@ -1,20 +1,14 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import store from '../common/store';
-import App from '../containers/App/App';
-import StyleContext from 'isomorphic-style-loader/StyleContext';
-// import RequestContext from '../common/context/request-context';
+import Entry from '../common/Entry';
+import { BrowserRouter as Router } from 'react-router-dom'
 
-const insertCss = () => {}
+import TestContext from '../common/context/TestContext';
+
+
 ReactDom.hydrate(
-    <StyleContext.Provider value={{ insertCss }}>
-      <Provider store={store}>
-        <Router>
-          <App />
-        </Router>
-      </Provider>
-    </StyleContext.Provider>,
+    <Router>
+      <Entry />
+    </Router>,
   document.getElementById('root')
 )
