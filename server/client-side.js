@@ -34,4 +34,3 @@ const port = config[CONFIG_CLIENT_KEY].PORT;
  clientRenderApp.listen(port, () => {
    console.log('client side render app started on ' + port);
  });
-
