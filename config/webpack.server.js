@@ -12,7 +12,7 @@ const webpackConfigClient = {
   },
   // webpack-node-externals的目的是为了防止node_modules目录下的第三方模块被打包进去
   // 因为nodejs默认会去node_modules目录下去寻找和使用第三方模块。
-  externals: [nodeExternals()],  //保持node中require的引用方式
+  // externals: [nodeExternals()],  //保持node中require的引用方式
   // plugins: [new MiniCssExtractPlugin()],
   module: {
     rules: [

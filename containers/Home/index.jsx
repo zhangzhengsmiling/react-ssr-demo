@@ -1,52 +1,55 @@
-import React, { useContext, useEffect } from 'react';
-import TestContext from '@/common/context/TestContext';
+import React, { useEffect, useState, useContext } from 'react';
+import TestContext from '../../common/context/TestContext';
+import { useHistory } from 'react-router';
 
-const Home = (props) => {
+const dataKey = 'HOME';
 
-  const store = useContext(TestContext);
+const Home = () => {
+
+  const store = useContext(TestContext)
+  const [state, setState] = useState(store?.[dataKey])
+  const history = useHistory();
 
   useEffect(() => {
-    Home.getInitialData()
-      .then(user => {
-        store.setData(user);
+    !state && Home.getData()
+      .then(data => {
+        console.log(data)
+        setState(data[dataKey])
       })
   }, [])
 
   return (
     <div>
-      <h1>
-        {store.data?.name}'s homepage
-      </h1>
+      hello, this is entry point...
       <p>
-        age: {store.data?.age}
+        name: {state?.name}
       </p>
       <p>
-        link...
+        age: {state?.age}
       </p>
       <p>
-        <button onClick={() => props.history.push('/list')}>to list</button>
+        hobby: {state?.hobby}
       </p>
       <p>
-        <button onClick={() => props.history.push('/about')}>to about</button>
+        <button onClick={() => history.push('/about')}>jump!</button>
       </p>
     </div>
   )
 }
 
-Home.getInitialData = () => {
-  if (Home.data) return new Promise(() => Home.data)
-  const promise = new Promise((resolve) => {
+Home.getData = () => {
+  return new Promise((resolve) => {
+    console.log('------请求了--------')
     setTimeout(() => {
-      resolve({
-        name: 'zhangzhengsmiling',
-        age: 18,
+      return resolve({
+          [dataKey]: {
+          name: 'zhangzhengsmiling',
+          age: 18,
+          hobby: 'coding...'
+        }
       })
-    }, 1000);
-  }).then(data => {
-    Home.data = data;
-    return data;
+    }, 500)
   })
-  return promise;
 }
 
 export default Home;

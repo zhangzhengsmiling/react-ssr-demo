@@ -9,30 +9,46 @@ import Entry from '../common/Entry';
 import { StaticRouter as Router } from 'react-router';
 import { routes } from '@/common/routes'
 import { matchRoutes } from 'react-router-config';
+import TestContext from '../common/context/TestContext';
 /**
  * server-sider rendering...
  */
  const serverRenderApp = express();
 
  serverRenderApp.use('/', express.static('public'));
+
+ serverRenderApp.use('/api/user', (req, res) => {
+   res.json({
+     name: 'zhangzhengsmiling',
+     age: 18,
+     hobby: 'coding...',
+   })
+ })
  serverRenderApp.use('/', (req, res) => {
    const location = req.path;
    if(req.url === '/favicon.ico') return;
-   console.log(location)
    const matchedRoute = matchRoutes(routes, location);
-  console.log(matchedRoute[0].route.component)
-  matchedRoute[0].route.component.getInitialData()
-    .then(user => {
+   console.log(matchedRoute)
+
+   const matched = routes.find(item => item.path === location)
+   if (!matched) return res.end('<p>ERROR</p>')
+   matched.component.getData()
+    .then((data) => {
+      const ssrData = data;
+      const script = `window.ssrData=${JSON.stringify(ssrData)}`;
       const content = renderToString(
-        <Router location={location}>
-          <Entry data={user} />
-        </Router>
-       );
-       templateReader
-         .then(template => template.replace(/#content/, content))
-         .then(html => res.send(html))
-         .catch(errorHandlerMiddleware(res))
-    })
+        <TestContext.Provider value={ssrData}>
+          <Router location={location}>
+            <Entry />
+          </Router>
+        </TestContext.Provider>
+      )
+      templateReader
+        .then(template => template.replace(/#content/, content))
+        .then(template => template.replace(/#script/, script))
+        .then(html => res.send(html))
+        .catch(errorHandlerMiddleware(res))
+      })
 
  });
 

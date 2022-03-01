@@ -1,14 +1,21 @@
 import React from 'react';
+import { useHistory } from 'react-router';
 
-const About = (props) => {
+const About = () => {
+
+  const history = useHistory();
   return (
     <div>
-      hello, this is about...
-      <p>
-        <button onClick={() => props.history.goBack()}>back</button>
-      </p>
+      this is about
+      <button onClick={() => history.push('/home')}>jump!</button>
     </div>
   )
+}
+
+About.getData = () => {
+  return new Promise((resolve) => {
+    resolve()
+  })
 }
 
 export default About;

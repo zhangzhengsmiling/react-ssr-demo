@@ -4,7 +4,7 @@ import config from '../config';
 
 const readFilePromise = promisify(fs.readFile);
 // 读取模板文件template
-const tempalteReader = readFilePromise(config.templatePath)
+const templateReader = readFilePromise(config.templatePath)
   .then(data => data.toString());
 
-export default tempalteReader;
+export default templateReader;

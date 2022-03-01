@@ -1,2 +1,2 @@
-import './client-side';
+// import './client-side';
 import './server-side';
