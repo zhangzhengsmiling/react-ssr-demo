@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import Entry from '../common/Entry';
 import { BrowserRouter as Router } from 'react-router-dom'
-import TestContext from '@/common/context/TestContext';
+import SSRDataContext from '@/common/context';
 
 
-ReactDom.hydrate(
-  <TestContext.Provider value={(() => {
+ReactDom.render(
+  <SSRDataContext.Provider value={(() => {
     const ssrData = global.ssrData
     global.ssrData = undefined;
     return ssrData;
@@ -14,6 +14,6 @@ ReactDom.hydrate(
     <Router>
       <Entry />
     </Router>
-  </TestContext.Provider>,
+  </SSRDataContext.Provider>,
   document.getElementById('root')
 )

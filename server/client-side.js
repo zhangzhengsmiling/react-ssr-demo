@@ -9,16 +9,11 @@ const port = config[CONFIG_CLIENT_KEY].PORT;
  */
  const clientRenderApp = express();
 
- clientRenderApp.use('/api/v1/list', (req, res) => {
-  res.send({
-    code: 1,
-    msg: '',
-    success: true,
-    data: [
-      { content: 'hello, this is content1' },
-      { content: 'hello, this is content2' },
-      { content: 'hello, this is content3' },
-    ]
+ clientRenderApp.use('/api/user', (req, res) => {
+  res.json({
+    name: 'zhangzhengsmiling',
+    age: 18,
+    hobby: 'coding...',
   })
 });
 
@@ -27,6 +22,7 @@ const port = config[CONFIG_CLIENT_KEY].PORT;
    if(req.url === '/favicon.ico') return;
    templateReader
      .then(template => template.replace(/#content/, ''))
+     .then(template => template.replace(/#script/, ''))
      .then(html => res.send(html))
      .catch(errorHandlerMiddleware(res));
  });

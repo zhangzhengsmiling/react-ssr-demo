@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import App from '../containers/App';
-import TestContext from './context/TestContext';
 
 const Entry = () => {
   return (

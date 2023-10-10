@@ -1,23 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react';
-import TestContext from '../../common/context/TestContext';
 import { useHistory } from 'react-router';
-
-const dataKey = 'HOME';
+import { useSSRState } from '@/common/context';
 
 const Home = () => {
-
-  const store = useContext(TestContext)
-  const [state, setState] = useState(store?.[dataKey])
+  const [state, setState] = useSSRState(Home.getData)
   const history = useHistory();
-
-  useEffect(() => {
-    !state && Home.getData()
-      .then(data => {
-        console.log(data)
-        setState(data[dataKey])
-      })
-  }, [])
-
   return (
     <div>
       hello, this is entry point...
@@ -37,19 +24,8 @@ const Home = () => {
   )
 }
 
-Home.getData = () => {
-  return new Promise((resolve) => {
-    console.log('------请求了--------')
-    setTimeout(() => {
-      return resolve({
-          [dataKey]: {
-          name: 'zhangzhengsmiling',
-          age: 18,
-          hobby: 'coding...'
-        }
-      })
-    }, 500)
-  })
+Home.getData = (fetch) => {
+  return fetch('/api/user').then(res => res.json())
 }
 
-export default Home;
+export default Home
