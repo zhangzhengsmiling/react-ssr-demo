@@ -27,6 +27,6 @@ const webpackConfigBase = {
 			exclude: /node_modules/,
 		}]
 	}
-}
+};
 
 module.exports = webpackConfigBase;

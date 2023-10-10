@@ -6,8 +6,8 @@ const promisify = (fn) => (...args) => {
       } else {
         return resolve(data);
       }
-    })
-  })
-}
+    });
+  });
+};
 
 export default promisify;

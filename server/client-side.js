@@ -14,7 +14,7 @@ const port = config[CONFIG_CLIENT_KEY].PORT;
     name: 'zhangzhengsmiling',
     age: 18,
     hobby: 'coding...',
-  })
+  });
 });
 
  clientRenderApp.use('/', express.static('public'));

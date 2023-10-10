@@ -3,7 +3,7 @@ import { useHistory } from 'react-router';
 import { useSSRState } from '@/common/context';
 
 const Home = () => {
-  const [state, setState] = useSSRState(Home.getData)
+  const [state, setState] = useSSRState(Home.getData);
   const history = useHistory();
   return (
     <div>
@@ -21,11 +21,11 @@ const Home = () => {
         <button onClick={() => history.push('/about')}>jump!</button>
       </p>
     </div>
-  )
-}
+  );
+};
 
 Home.getData = (fetch) => {
-  return fetch('/api/user').then(res => res.json())
-}
+  return fetch('/api/user').then(res => res.json());
+};
 
-export default Home
+export default Home;

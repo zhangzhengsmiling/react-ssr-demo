@@ -11,6 +11,6 @@ const config = {
     PORT: 3001,
   },
   templatePath: path.resolve(__dirname, '../template/index.html'),
-}
+};
 
 export default config;

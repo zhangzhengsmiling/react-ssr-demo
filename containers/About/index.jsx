@@ -9,13 +9,13 @@ const About = () => {
       this is about
       <button onClick={() => history.push('/home')}>jump!</button>
     </div>
-  )
-}
+  );
+};
 
 About.getData = () => {
   return new Promise((resolve) => {
-    resolve()
-  })
-}
+    resolve();
+  });
+};
 
 export default About;

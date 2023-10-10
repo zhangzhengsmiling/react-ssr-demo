@@ -2,7 +2,7 @@
 let _user = {
   name: 'zhangzhengsmiling',
   age: 18,
-}
+};
 
 export default {
   get() {
@@ -11,4 +11,4 @@ export default {
   set(user) {
     _user = user;
   }
-}
+};

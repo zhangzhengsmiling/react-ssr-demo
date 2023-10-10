@@ -7,24 +7,27 @@ import config, { CONFIG_SERVER_KEY } from './config';
 const port = config[CONFIG_SERVER_KEY].PORT;
 import Entry from '../common/Entry';
 import { StaticRouter as Router } from 'react-router';
-import { routes } from '@/common/routes'
+import { routes } from '@/common/routes';
 import { matchRoutes } from 'react-router-config';
 import SSRDataContext from '@/common/context';
-import _fetch from 'node-fetch'
+import _fetch from 'node-fetch';
+import StyleContext from 'isomorphic-style-loader/StyleContext';
+import store from '../common/store';
+import { Provider } from 'react-redux';
 /**
  * server-sider rendering...
  */
  const serverRenderApp = express();
  const fetch = (url) => {
-  return _fetch(`http://127.0.0.1:3000${url}`)
- }
+  return _fetch(`http://127.0.0.1:3000${url}`);
+ };
 
  serverRenderApp.use('/api/user', (req, res) => {
   res.json({
     name: 'zhangzhengsmiling',
     age: 18,
     hobby: 'coding...',
-  })
+  });
 });
 
  serverRenderApp.use('/', express.static('public'));
@@ -32,30 +35,41 @@ import _fetch from 'node-fetch'
  serverRenderApp.use('/', (req, res) => {
    const location = req.path;
    if(req.url === '/favicon.ico') return;
+   const css = new Set();
+   const insertCss = (...styles) => {
+     return styles.forEach(style => {
+       return css.add(style._getCss());
+     });
+   };
    const matchedRoute = matchRoutes(routes, location);
-   console.log(matchedRoute)
+   console.log(matchedRoute);
 
-   const matched = routes.find(item => item.path === location)
-   if (!matched) return res.end('<p>ERROR</p>')
+   const matched = routes.find(item => item.path === location);
+   if (!matched) return res.end('<p>ERROR</p>');
    const pureRender = (ssrData) => {
     const script = `window.ssrData=${JSON.stringify(ssrData)}`;
     const content = renderToString(
-      <SSRDataContext.Provider value={ssrData}>
-        <Router location={location}>
-          <Entry />
-        </Router>
-      </SSRDataContext.Provider>
-    )
+      <StyleContext.Provider value={{ insertCss }}>
+        <SSRDataContext.Provider value={ssrData}>
+          <Provider store={store}>
+            <Router location={location}>
+              <Entry />
+            </Router>
+          </Provider>
+        </SSRDataContext.Provider>
+      </StyleContext.Provider>
+    );
     templateReader
       .then(template => template.replace(/#content/, content))
       .then(template => template.replace(/#script/, script))
+      .then(template => template.replace(/\<style\>\<\/style\>/, '<style>'+ [...css].join('') +'</style>'))
       .then(html => res.send(html))
-      .catch(errorHandlerMiddleware(res))
-    }
+      .catch(errorHandlerMiddleware(res));
+    };
     if (matched.component?.getData) {
-      matched.component?.getData(fetch).then(pureRender)
+      matched.component?.getData(fetch).then(pureRender);
     } else {
-      pureRender()
+      pureRender();
     }
  });
 

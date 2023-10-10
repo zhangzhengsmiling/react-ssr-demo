@@ -46,6 +46,6 @@ const webpackConfigClient = {
       }
     ]
   },
-}
+};
 
 module.exports = merge({}, webpackConfigClient, webpackConfigBase);

@@ -4,7 +4,7 @@ const compose = (...fns) => {
     return fns.reduceRight((temp, fn) => {
       return fn(temp);
     }, trigger);
-  }
-}
+  };
+};
 
 export default compose;
